@@ -23,7 +23,7 @@ jobs:
     - name: Compare changes
       run: |
         git checkout main  # Change to the branch you want to monitor
-        git merge upstream/main  # Merge changes from the original repository
+        git pull --rebase upstream main
         git push origin main  # Push the changes to your forked repository
 
     - name: Create PR
