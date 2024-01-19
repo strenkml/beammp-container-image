@@ -1,0 +1,32 @@
+name: Auto-Create PR for Original Repo Changes
+
+on:
+  schedule:
+    - cron: '0 0 * * 0'
+
+jobs:
+  create_pr:
+    runs-on: ubuntu-latest
+
+    steps:
+    - name: Check out code
+      uses: actions/checkout@v2
+
+    - name: Set up Git
+      run: |
+        git config user.name "Matt Strenk"
+        git config user.email "${{ secrets.GIT_EMAIL }}"
+        git remote add upstream https://github.com/RouHim/beammp-container-image.git
+        git fetch upstream
+
+    - name: Compare changes
+      run: |
+        git checkout main  # Change to the branch you want to monitor
+        git merge upstream/main  # Merge changes from the original repository
+        git push origin main  # Push the changes to your forked repository
+
+    - name: Create PR
+      run: |
+        hub pull-request -b main -h strenkml:main -m "Sync with original repo" -o
+      env:
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
