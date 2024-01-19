@@ -1,3 +1,8 @@
+# Differences from original repo
+
+The container does not depend on the environment variables. The server config is completely managed by the ServerConfig.toml file
+
+
 <p align="center">
   <img src="https://raw.githubusercontent.com/RouHim/beammp-container-image/main/logo.svg" width="250">
 </p>

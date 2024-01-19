@@ -28,17 +28,6 @@ RUN export LATEST_VERSION=$(curl -s https://api.github.com/repos/BeamMP/BeamMP-S
 FROM docker.io/ubuntu:22.04
 LABEL maintainer="Rouven Himmelstein rouven@himmelstein.info"
 
-## Game server parameter and their defaults
-ENV BEAMMP_PORT "30814"
-ENV BEAMMP_NAME "BeamMP New Server"
-ENV BEAMMP_MAP "/levels/gridmap_v2/info.json"
-ENV BEAMMP_DESCRIPTION "BeamMP Default Description"
-ENV BEAMMP_MAX_CARS "1"
-ENV BEAMMP_MAX_PLAYERS "10"
-ENV BEAMMP_PRIVATE "true"
-ENV BEAMMP_DEBUG "false"
-ENV BEAMMP_AUTH_KEY ""
-
 # Install game server required packages
 RUN apt update && \
     apt install -y liblua5.3-0 && \
