@@ -11,7 +11,7 @@ on:
 
 env:
   CONTAINER_FILE: ./Containerfile
-  IMAGE_NAME: rouhim/beammp-server
+  IMAGE_NAME: strenkml/beammp-server
   IMAGE_TAG: latest
 
 jobs:
