@@ -75,7 +75,10 @@ jobs:
         env:
           BEAMMP_AUTH_KEY: ${{ secrets.BEAMMP_AUTH_KEY }}
         run: |
-          bash test-image.sh ${{ env.IMAGE_NAME }}:${{ env.IMAGE_TAG }}
+          mkdir client-mods server-mods
+          chmod 777 client-mods server-mods
+          cp .env.example .env 
+          timeout 1m bash test-image.sh
 
       - name: Build and push multiplatform container image
         if: github.ref == 'refs/heads/main'
@@ -90,7 +93,7 @@ jobs:
 
       - name: Update docker hub description
         if: github.ref == 'refs/heads/main'
-        uses: peter-evans/dockerhub-description@v3
+        uses: peter-evans/dockerhub-description@v4
         with:
           username: ${{ secrets.DOCKERHUB_USERNAME }}
           password: ${{ secrets.DOCKERHUB_PASSWORD }}
